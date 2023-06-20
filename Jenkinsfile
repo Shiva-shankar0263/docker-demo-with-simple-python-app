@@ -11,8 +11,8 @@ pipeline {
 		     #aws configure set default.region ap-southeast-1
          	     aws ecr get-login-password --region ap-southeast-1 | docker login --username AWS --password-stdin 933542948767.dkr.ecr.ap-southeast-1.amazonaws.com
                      docker build -t shivaproject . 
-                     docker tag shivaproject:latest 933542948767.dkr.ecr.ap-southeast-1.amazonaws.com/shivaproject:$(BUILD_NUMBER)
-                     docker push 933542948767.dkr.ecr.ap-southeast-1.amazonaws.com/shivaproject:$(BUILD_NUMBER)
+                     docker tag shivaproject:latest 933542948767.dkr.ecr.ap-southeast-1.amazonaws.com/shivaproject:latest
+                     docker push 933542948767.dkr.ecr.ap-southeast-1.amazonaws.com/shivaproject:latest
 		     '''
 	     }	         
 	   }
@@ -20,7 +20,7 @@ pipeline {
     stage('Deploy docker'){
       steps {
 		     sh '''
-                         ssh -i /var/lib/jenkins/.ssh/application.pem -o StrickHostKeyChecking=no ubuntu@ec2-54-169-72-199.ap-southeast-1.compute.amazonaws.com 'bash -s'< ./deploy.sh \$(BUILD_NUMBER)
+                         ssh -i /var/lib/jenkins/.ssh/application.pem -o StrickHostKeyChecking=no ubuntu@ec2-54-169-72-199.ap-southeast-1.compute.amazonaws.com 'bash -s'< ./deploy.sh 
             	        '''
       		}
 		}		    
