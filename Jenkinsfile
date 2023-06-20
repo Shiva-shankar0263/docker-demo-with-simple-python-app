@@ -20,7 +20,7 @@ pipeline {
     stage('Deploy docker'){
       steps {
 		     sh '''
-                         ssh -i /var/lib/jenkins/.ssh/application.pem -o StrickHostKeyChecking=no ubuntu@ec2-54-169-72-199.ap-southeast-1.compute.amazonaws.com 'bash -s'< ./deploy.sh 
+                         ssh -i /var/lib/jenkins/.ssh/application.pem ubuntu@ec2-54-169-72-199.ap-southeast-1.compute.amazonaws.com 'bash -s'< ./deploy.sh 
             	        '''
       		}
 		}		    
